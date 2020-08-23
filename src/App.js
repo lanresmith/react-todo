@@ -10,7 +10,7 @@ class App extends React.Component {
     // construct a new todo
     const todo = {
       id: generateId(),
-      name: this.state.todo,
+      name: this.state.todo.trim(),
       complete: false,
     }
 
@@ -19,7 +19,8 @@ class App extends React.Component {
     }
 
     this.setState({
-      todos: this.state.todos.concat(todo)
+      todos: this.state.todos.concat(todo),
+      todo:''
     });
   }
 
@@ -31,10 +32,9 @@ class App extends React.Component {
 
   toggleTodo = (id) => {
     this.setState({
-      todos: this.state.todos.map(todo => {
-        if (todo.id === id) todo.complete = !todo.complete;
-        return todo
-      })
+      todos: this.state.todos.map(todo => todo.id !== id ? todo :
+        Object.assign({}, todo, {complete: !todo.complete})
+      )
     });
   }
 
