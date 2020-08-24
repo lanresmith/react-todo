@@ -7,15 +7,16 @@ class App extends React.Component {
   addTodo = (event) => {
     event.preventDefault();
   
+    const name = this.state.todo.trim();
+    if (!name.length || todoExists(this.state.todos, name)) {
+      return;
+    }
+
     // construct a new todo
     const todo = {
       id: generateId(),
-      name: this.state.todo.trim(),
+      name,
       complete: false,
-    }
-
-    if (todoExists(this.state.todos, todo)) {
-      return;
     }
 
     this.setState({
@@ -63,8 +64,8 @@ class App extends React.Component {
   }
 }
 
-function todoExists(todos, todo) {
-  return undefined !== todos.find(({name}) => name.toUpperCase() === todo.name.toUpperCase())
+function todoExists(todos, todoName) {
+  return undefined !== todos.find(({name}) => name.toUpperCase() === todoName.toUpperCase())
 }
 
 function generateId () {
