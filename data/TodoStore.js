@@ -55,7 +55,7 @@ class TodoStore extends ReduceStore {
       case TodoActionTypes.CHANGE_INPUT:
         const target = action.event.target;
         // we use this object property notation (with target.name) in order to easily
-        // accomodate more inputs that may be added in future, else, state.todo works.
+        // accomodate more inputs that may be added in future, else, 'todo' works.
         state = Object.assign({}, state, {[target.name]: target.value});
         break;
     }
